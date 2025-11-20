@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>烟花绽放</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+            font-family: '华文行楷', 'STXingkai', '楷体', 'KaiTi', serif;
+        }
+        
+        /* 添加固定背景样式 */
+        body {
+            background-image: url('./images/1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        canvas {
+            display: block;
+            cursor: crosshair;
+            background: transparent;
+        }
+        
+        .hint-text {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #fff;
+            font-size: 28px;
+            text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #f80;
+            pointer-events: none;
+            animation: glow 2s ease-in-out infinite alternate;
+            z-index: 10;
+            white-space: nowrap;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #fff, 0 0 20px #ff0, 0 0 30px #f80; }
+            to { text-shadow: 0 0 20px #fff, 0 0 30px #ff0, 0 0 40px #f80, 0 0 50px #f40; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="cvs"></canvas>
+    <div class="hint-text">点击屏幕发射烟花</div>
+    
+    <!-- 加载配置文件和模块 -->
+    <script src="js/config.js"></script>
+    <script src="js/filemanager.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/entities.js"></script>
+    <script src="js/fireworks.js"></script>
+    <script src="js/ui.js"></script>
+    
+    <script>
+    // 设置默认配置（移除背景设置）
+    FireworksConfig.music.tracks = [{
+        name: '默认背景音乐',
+        url: './audios/1.mp3',
+        loop: true
+    }];
+    FireworksConfig.music.enabled = true;
+    FireworksConfig.music.volume = 0.4;
+    
+    // 初始化应用
+    const fireworksApp = new FireworksApp();
+    </script>
+</body>
+</html>
